@@ -1,0 +1,12 @@
+[init]
+path=./pmts/
+cur_pattern=dw
+#'ht':»Øµ÷,'dw':Ë«µ×
+
+[dw]
+t_file=t_parameter_v3.txt
+f_file=f_parameter_v3.txt
+
+[ht]
+t_file=t_parameter_v4.txt
+f_file=f_parameter_v4.txt

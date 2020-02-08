@@ -1,0 +1,53 @@
+from pattern_rec import *
+import time
+try:
+    import configparser
+except:
+    import ConfigParser as configparser
+def initialize(context):
+    cf = configparser.ConfigParser()
+    cf.read('cfg.txt')
+    pattern().parse_args('cfg.txt')
+    g.beg=time.time()
+    pool=get_index_stocks('000985.XSHG',str(context.current_dt))[:600]
+    #result=pattern().dw(data,pool)
+    run_daily(get_wst1,time='18:04')
+    run_daily(get_wst2,time='18:04')
+    run_daily(get_wst3,time='18:04')
+    run_daily(get_wst4,time='18:04')
+    run_daily(get_wst5,time='18:04')
+def get_wst1(context):
+    pool=get_index_stocks('000985.XSHG',str(context.current_dt))[:600]
+    #pool=['000423.XSHE','002044.XSHE']
+    data=pattern().get_rawdata(pool,end_date=context.current_dt,end_num=150,start_num=30,step=1,unit='1d')
+    result=pattern().dw(data,pool)
+    print('1',result)
+    pattern().record(str(context.current_dt)[:10],result)
+    
+def get_wst2(context):
+    pool=get_index_stocks('000985.XSHG',str(context.current_dt))[600:1200]
+    data=pattern().get_rawdata(pool,end_date=context.current_dt,end_num=150,start_num=30,step=1,unit='1d')
+    result=pattern().dw(data,pool)
+    print('2',result)
+    pattern().record(str(context.current_dt)[:10],result)
+def get_wst3(context):
+    pool=get_index_stocks('000985.XSHG',str(context.current_dt))[1200:1800]
+    data=pattern().get_rawdata(pool,end_date=context.current_dt,end_num=150,start_num=30,step=1,unit='1d')
+    result=pattern().dw(data,pool)
+    
+    pattern().record(str(context.current_dt)[:10],result)
+    print(result)
+def get_wst4(context):
+    pool=get_index_stocks('000985.XSHG',str(context.current_dt))[1800:2400]
+    data=pattern().get_rawdata(pool,end_date=context.current_dt,end_num=150,start_num=30,step=1,unit='1d')
+    result=pattern().dw(data,pool)
+    print(result)
+    pattern().record(str(context.current_dt)[:10],result)
+def get_wst5(context):
+    pool=get_index_stocks('000985.XSHG',str(context.current_dt))[2400:]
+    data=pattern().get_rawdata(pool,end_date=context.current_dt,end_num=150,start_num=30,step=1,unit='1d')
+    result=pattern().dw(data,pool)
+    print(result)
+    pattern().record(str(context.current_dt)[:10],result)
+    end=time.time()
+    print(end-g.beg)
